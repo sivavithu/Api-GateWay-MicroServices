@@ -2,9 +2,6 @@
 
 Welcome to the **API Gateway** project! This is a beginner-friendly, lightweight API Gateway built using **Ocelot** in ASP.NET Core, designed to orchestrate microservices for authentication and CRUD operations. It serves as a single entry point for your applications, securely routing requests to downstream services while enforcing JWT-based authentication. Perfect for developers new to microservices or those looking to learn, this project offers an easy-to-understand setup with scalability and security in mind.
 
-![API Gateway Demo](https://via.placeholder.com/1200x400.png?text=API+Gateway+Demo)  
-*(Add a screenshot or diagram of your setup for visual appeal – replace with your own image URL)*
-
 ## ✨ Why This Project Stands Out
 - **Beginner-Friendly**: Simple setup and clear documentation for learning microservices.
 - **Microservices Ready**: Seamlessly routes to Auth (port 5001) and CRUD (port 5002) services.
@@ -20,7 +17,7 @@ Welcome to the **API Gateway** project! This is a beginner-friendly, lightweight
 - Includes logging for debugging and monitoring.
 
 ## 🛠️ Prerequisites
-- **.NET 8 SDK** (or your version)
+- **.NET 9 SDK** (or your version)
 - **Visual Studio 2022** (or code editor with .NET support)
 - **Auth Service** (port 5001) and **CRUD Service** (port 5002) running
 - **Postman** or similar for API testing
