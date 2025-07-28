@@ -4,7 +4,7 @@ Welcome to the **API Gateway**! This is a beginner-friendly, lightweight API Gat
 
 ## ✨ Why This works
 - **Beginner-Friendly**: Simple setup and clear documentation for learning microservices.
-- **Microservices Ready**: Seamlessly routes to Auth (port 5001) and CRUD (port 5002) services.
+- **Microservices Ready**: Seamlessly routes to Auth and CRUD  services.
 - **Secure by Design**: Integrates JWT authentication with customizable validation.
 - **Scalable Architecture**: Supports load balancing and easy extension for more services.
 - **Open Source**: Contribute, fork, and enhance this gateway for your needs!
@@ -19,7 +19,7 @@ Welcome to the **API Gateway**! This is a beginner-friendly, lightweight API Gat
 ## 🛠️ Prerequisites
 - **.NET 9 SDK** (or your version)
 - **Visual Studio 2022** (or code editor with .NET support)
-- **Auth Service** (port 5001) and **CRUD Service** (port 5002) running
+- **Auth Service** and **CRUD Service**  running
 - **Postman** or similar for API testing
 
 ## 📋 Installation
