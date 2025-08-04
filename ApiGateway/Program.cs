@@ -11,14 +11,22 @@ builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange
 builder.Services.AddOcelot(builder.Configuration);
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowViteFrontend",
+    options.AddPolicy("AllowGateway",
         policy =>
         {
-            policy.WithOrigins("https://localhost:8080")
-                  .AllowAnyMethod()
+            policy.AllowAnyOrigin()  // Or specific origins like "http://localhost:5000"
+                  .AllowAnyMethod()  // Includes OPTIONS, POST
                   .AllowAnyHeader();
         });
 });
+var jwtKey = builder.Configuration["AppSettings:Key"];
+var jwtIssuer = builder.Configuration["AppSettings:issuer"];
+var jwtAudience = builder.Configuration["AppSettings:Audience"];
+
+if (string.IsNullOrEmpty(jwtKey) || string.IsNullOrEmpty(jwtIssuer) || string.IsNullOrEmpty(jwtAudience))
+{
+    throw new InvalidOperationException("JWT configuration is missing in AppSettings.");
+}
 
 // Add JWT Authentication for protected routes
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -27,22 +35,29 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
-            ValidIssuer = builder.Configuration["AppSettings:issuer"],
+            ValidIssuer = jwtIssuer,
             ValidateAudience = true,
-            ValidAudience = builder.Configuration["AppSettings:Audience"],
+            ValidAudience = jwtAudience,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Key"]!)),
-            ValidateLifetime = true
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero 
         };
     });
 
 var app = builder.Build();
 Console.WriteLine(DateTime.UtcNow);
 
-//app.UseCors("AllowViteFrontend");
-//app.UseHttpsRedirection();
+if(app.Environment.IsDevelopment())
+{
+    app.UseHsts();
+}
+app.UseRouting();
+app.UseCors("AllowGateway");
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 // Use Ocelot middleware for routing
 await app.UseOcelot();

@@ -28,8 +28,17 @@
         "AllowedScopes": []
       },
       "AddHeadersToRequest": {
-        "Authorization": "{Authorization}",
-        "Content-Type": "{Content-Type}"
+        //"Authorization": "{Authorization}",
+        //"Content-Type": "{Content-Type}"
+      },
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 5,
+        "QuotaExceededMessage": "Too many requests. Please try again later.",
+        "HttpStatusCode": 429
       }
     }
   ],
