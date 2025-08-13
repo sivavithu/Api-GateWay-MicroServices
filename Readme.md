@@ -26,4 +26,4 @@ Welcome to the **API Gateway**! This is a beginner-friendly, lightweight API Gat
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/sivavithu/Api-GateWay-MicroServices.git
-   cd api-gateway
+   cd apigateway
