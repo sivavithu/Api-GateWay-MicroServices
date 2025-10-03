@@ -5,8 +5,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5001
+          "Host": "oauth-service.icywater-e2b57c27.southeastasia.azurecontainerapps.io",
+          "Port": 443
         }
       ],
       "UpstreamPathTemplate": "/auth/{everything}",
@@ -17,20 +17,12 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5002
+          "Host": "crud-service.internal.icywater-e2b57c27.southeastasia.azurecontainerapps.io",
+          "Port": 443
         }
       ],
       "UpstreamPathTemplate": "/api/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE","OPTIONS" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "JwtScheme",
-        "AllowedScopes": []
-      },
-      "AddHeadersToRequest": {
-        //"Authorization": "{Authorization}",
-        //"Content-Type": "{Content-Type}"
-      },
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
@@ -43,6 +35,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5000"
+    "BaseUrl": "https://api-gateway.icywater-e2b57c27.southeastasia.azurecontainerapps.io"
   }
 }
