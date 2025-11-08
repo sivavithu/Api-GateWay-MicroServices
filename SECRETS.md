@@ -70,11 +70,17 @@ docker run -d \
 ```
 
 #### Using docker-compose:
-Create a `.env` file (add to `.gitignore`):
+Create a `.env` file based on `.env.example`:
+```bash
+cp .env.example .env
+# Edit .env with your actual values
+```
+
+Example `.env` file:
 ```env
-JWT_KEY=your-jwt-secret
-JWT_ISSUER=loginapp
-JWT_AUDIENCE=myAwesomeAudience
+AppSettings__Key=your-jwt-secret
+AppSettings__issuer=loginapp
+AppSettings__Audience=myAwesomeAudience
 ```
 
 Update your `docker-compose.yml`:
@@ -83,10 +89,22 @@ version: '3.8'
 services:
   api-gateway:
     image: api-gateway
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+```
+
+Or pass environment variables directly:
+```yaml
+version: '3.8'
+services:
+  api-gateway:
+    image: api-gateway
     environment:
-      - AppSettings__Key=${JWT_KEY}
-      - AppSettings__issuer=${JWT_ISSUER}
-      - AppSettings__Audience=${JWT_AUDIENCE}
+      - AppSettings__Key=${AppSettings__Key}
+      - AppSettings__issuer=${AppSettings__issuer}
+      - AppSettings__Audience=${AppSettings__Audience}
     ports:
       - "8080:8080"
 ```
