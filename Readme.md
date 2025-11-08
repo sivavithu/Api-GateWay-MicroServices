@@ -36,9 +36,9 @@ Welcome to the **API Gateway**! This is a beginner-friendly, lightweight API Gat
    For local development, use .NET User Secrets:
    ```bash
    cd ApiGateway
-   dotnet user-secrets set "AppSettings:Key" "your-secure-jwt-secret-key-minimum-32-characters"
-   dotnet user-secrets set "AppSettings:issuer" "loginapp"
-   dotnet user-secrets set "AppSettings:Audience" "myAwesomeAudience"
+   dotnet user-secrets set "AppSettings:Key" "REPLACE_WITH_YOUR_JWT_SECRET_KEY_MINIMUM_32_CHARACTERS"
+   dotnet user-secrets set "AppSettings:issuer" "REPLACE_WITH_YOUR_ISSUER"
+   dotnet user-secrets set "AppSettings:Audience" "REPLACE_WITH_YOUR_AUDIENCE"
    ```
    
    📖 **See [SECRETS.md](SECRETS.md) for complete configuration guide including production deployment.**

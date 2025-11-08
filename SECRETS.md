@@ -27,9 +27,9 @@ For local development, use .NET User Secrets:
 
 2. Set your JWT configuration using user secrets:
    ```bash
-   dotnet user-secrets set "AppSettings:Key" "your-secure-jwt-secret-key-minimum-32-characters"
-   dotnet user-secrets set "AppSettings:issuer" "loginapp"
-   dotnet user-secrets set "AppSettings:Audience" "myAwesomeAudience"
+   dotnet user-secrets set "AppSettings:Key" "REPLACE_WITH_YOUR_JWT_SECRET_KEY_MINIMUM_32_CHARACTERS"
+   dotnet user-secrets set "AppSettings:issuer" "REPLACE_WITH_YOUR_ISSUER"
+   dotnet user-secrets set "AppSettings:Audience" "REPLACE_WITH_YOUR_AUDIENCE"
    ```
 
 3. Verify your secrets are set:
@@ -52,9 +52,9 @@ For production environments, use environment variables:
 Use double underscores (`__`) to represent nested configuration:
 
 ```bash
-export AppSettings__Key="your-production-jwt-secret"
-export AppSettings__issuer="loginapp"
-export AppSettings__Audience="myAwesomeAudience"
+export AppSettings__Key="REPLACE_WITH_YOUR_JWT_SECRET_KEY"
+export AppSettings__issuer="REPLACE_WITH_YOUR_ISSUER"
+export AppSettings__Audience="REPLACE_WITH_YOUR_AUDIENCE"
 ```
 
 ### Docker Deployment
@@ -62,9 +62,9 @@ export AppSettings__Audience="myAwesomeAudience"
 #### Using docker run:
 ```bash
 docker run -d \
-  -e AppSettings__Key="your-jwt-secret" \
-  -e AppSettings__issuer="loginapp" \
-  -e AppSettings__Audience="myAwesomeAudience" \
+  -e AppSettings__Key="REPLACE_WITH_YOUR_JWT_SECRET" \
+  -e AppSettings__issuer="REPLACE_WITH_YOUR_ISSUER" \
+  -e AppSettings__Audience="REPLACE_WITH_YOUR_AUDIENCE" \
   -p 8080:8080 \
   api-gateway
 ```
@@ -78,9 +78,9 @@ cp .env.example .env
 
 Example `.env` file:
 ```env
-AppSettings__Key=your-jwt-secret
-AppSettings__issuer=loginapp
-AppSettings__Audience=myAwesomeAudience
+AppSettings__Key=REPLACE_WITH_YOUR_JWT_SECRET_KEY
+AppSettings__issuer=REPLACE_WITH_YOUR_ISSUER
+AppSettings__Audience=REPLACE_WITH_YOUR_AUDIENCE
 ```
 
 Update your `docker-compose.yml`:
@@ -115,9 +115,9 @@ Set environment variables in the Azure Portal:
 1. Go to your Container App
 2. Navigate to "Containers" → "Environment variables"
 3. Add:
-   - Name: `AppSettings__Key`, Value: (your secret)
-   - Name: `AppSettings__issuer`, Value: `loginapp`
-   - Name: `AppSettings__Audience`, Value: `myAwesomeAudience`
+   - Name: `AppSettings__Key`, Value: (your secret - at least 32 characters)
+   - Name: `AppSettings__issuer`, Value: (your issuer)
+   - Name: `AppSettings__Audience`, Value: (your audience)
 
 Or use Azure CLI:
 ```bash
@@ -126,8 +126,8 @@ az containerapp update \
   --resource-group your-rg \
   --set-env-vars \
     "AppSettings__Key=secretref:jwt-key" \
-    "AppSettings__issuer=loginapp" \
-    "AppSettings__Audience=myAwesomeAudience"
+    "AppSettings__issuer=REPLACE_WITH_YOUR_ISSUER" \
+    "AppSettings__Audience=REPLACE_WITH_YOUR_AUDIENCE"
 ```
 
 ## Security Best Practices
