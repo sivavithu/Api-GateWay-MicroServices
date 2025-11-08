@@ -8,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Load Ocelot config
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+
+// Add environment variables support (overrides appsettings.json)
+builder.Configuration.AddEnvironmentVariables();
+
 builder.Services.AddOcelot(builder.Configuration);
 builder.Services.AddCors(options =>
 {
@@ -25,7 +29,14 @@ var jwtAudience = builder.Configuration["AppSettings:Audience"];
 
 if (string.IsNullOrEmpty(jwtKey) || string.IsNullOrEmpty(jwtIssuer) || string.IsNullOrEmpty(jwtAudience))
 {
-    throw new InvalidOperationException("JWT configuration is missing in AppSettings.");
+    throw new InvalidOperationException(
+        "JWT configuration is missing. Please configure the following:\n" +
+        "- AppSettings:Key (JWT secret key)\n" +
+        "- AppSettings:issuer (JWT issuer)\n" +
+        "- AppSettings:Audience (JWT audience)\n\n" +
+        "For local development, use 'dotnet user-secrets set \"AppSettings:Key\" \"your-secret-key\"'\n" +
+        "For production, set environment variables: AppSettings__Key, AppSettings__issuer, AppSettings__Audience"
+    );
 }
 
 // Add JWT Authentication for protected routes

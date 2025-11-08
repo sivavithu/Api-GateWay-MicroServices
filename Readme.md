@@ -26,4 +26,25 @@ Welcome to the **API Gateway**! This is a beginner-friendly, lightweight API Gat
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/sivavithu/Api-GateWay-MicroServices.git
-   cd apigateway
+   cd ApiGateway
+   ```
+
+2. **Configure Secrets**
+   
+   The application requires JWT configuration. **Never commit secrets to git!**
+   
+   For local development, use .NET User Secrets:
+   ```bash
+   cd ApiGateway
+   dotnet user-secrets set "AppSettings:Key" "your-secure-jwt-secret-key-minimum-32-characters"
+   dotnet user-secrets set "AppSettings:issuer" "loginapp"
+   dotnet user-secrets set "AppSettings:Audience" "myAwesomeAudience"
+   ```
+   
+   📖 **See [SECRETS.md](SECRETS.md) for complete configuration guide including production deployment.**
+
+3. **Build and Run**
+   ```bash
+   dotnet build
+   dotnet run
+   ```
